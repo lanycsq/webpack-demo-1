@@ -7,7 +7,7 @@ const {
 } = require('webpack');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist',
@@ -31,8 +31,16 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
 
+            use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: '../',
+
+                    }
+                },
+                'css-loader'
+            ]
         }]
     }
 };
